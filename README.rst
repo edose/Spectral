@@ -78,10 +78,7 @@ After the optical stack simulation, the passband simulation is easy: multiply th
 3. Statistics:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-xxx
-
-
-
+Description of R code & mixed-model regression go here.
 
 Project History *(so far)*
 ----------------------------
@@ -95,18 +92,21 @@ Almost six years later, in late 2013, I had only the barest skeleton of a unifie
 Conclusions
 -----------
 
+[Conclusions from the SAS paper go here.]
 
 Side-trip: Coding Language
 -----------------------------
 
-I'm already getting dragged kicking and screaming (backwards) into the Python era. The way to get things done now is by collaboration, and Python is apparently the language of (bad) choice. It lacks encapsulation, which makes it fake-object-oriented and perfect for API abuse. It's suitable 10-line scripts if that's all you want to do, but a 3,000-line system becomes hopeless in the first few hours, turns into one huge mud flat. Python is fingernail-scraping-on-the-blackboard slow, and if it weren't for Cython, I wouldn't bother. At least PyCharm and py.test make for an organized and visually soothing IDE, so OK that's something.
+I'm already getting dragged kicking and screaming (backwards) into the Python era. The way to get things done now is by collaboration, and Python is apparently the language of (rather poor) choice. It lacks encapsulation, which makes it fake-object-oriented and perfect for API abuse. It's suitable for 10-line scripts if that's all you want to do, but a 3,000-line system becomes hopeless, turns into one huge mud flat. Python is fingernails-scraping-a-blackboard slow, and if it weren't for Cython, I wouldn't bother. At least PyCharm and py.test make for an organized and visually soothing IDE, so OK that's something good.
 
-In the end, I guess Python's the worst language except for most of the others. There's this rebellion out there in favor of free and open-source, and against corporation-driven tools. So C#--a truly excellent technical programming language--is right out, and even Java--which is just as cross-platform as Python, cleanly object-oriented, and 20-100 times faster than Python--is apparently too closely tied to one company's fate for the neckbeards to suffer. Although the same people go all Derp-trance over Apple, the most closed and corporate environment of them all.
+In the end, I guess Python's the worst language except for most of the others. There's this rebellion out there in favor of free and open-source, and against corporation-driven tools. I can sympathize and have definitely benefited from the movement, even within this project. But there are casualties, and to me it goes too far. C#--a truly excellent technical programming language--is now right out, and even Java--which is just as cross-platform as Python, cleanly object-oriented, and 20-100 times faster than Python--is apparently too closely tied to one company's fate. Although I must note that many of these same people go all Derp-trance over Apple, the most closed and corporate environment of them all. Python is dependent on a Benevolent Dictator for Life, and Python True Believers consider this a feature, not a bug. The satire writes itself.
 
-C# beautifully satisfy the scientific community's most common need for objects: data that answers for itself. You can construct a block of data that computes and returns any number of its own properties, and you can code it such that no one can screw it up even if they try to. If it compiles, it gives the right answer. You have to compile, yes, but if you want to use Python for anything but 2 + 2, you have to compile Cython anyway, so...
+C# beautifully satisfies the scientific community's most common need for objects: a data block that answers for itself. You can construct a block of data that computes and returns any number of its own properties, and you can code it such that no one can screw it up even if they try to. If you link to it, it gives the right answer. Period. You have to compile it in, yes--but hey if you want to use Python for anything more than 2+2 or Shopping Carts, you have to compile Cython anyway, so...
 
 R is underused in the scientific world. The statisticians and social scientists have all the fun (and that's probably the first time *that* sentence has ever been written).
 
 
 2014-2015 Plans at Bois d'Arc Observatory
 ------------------------------------------
+
+[extension to experimental data; Project Cirrus/mixed-model regression]
