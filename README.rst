@@ -78,16 +78,32 @@ After the optical stack simulation, the passband simulation is easy: multiply th
 3. Statistics:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Description of R code & mixed-model regression go here.
+All statistical code is in the R language. I almost always ran code as a function call from RStudio's Console window, the code itself showing in the window immediately above that. That's it. 
+
+Some of the files:
+
+**Experiments:** summary log of the experiments and very terse results from experiment blocks 001-013 supporting the SAS paper. Your guidebook to this work.
+
+**platform.R:** ignore get.cs(), not used. The function SAS2014.grey.theme() was used to define the graphics theme for R graphics included in the presentation file.
+
+**plot_001a.R:** a very typical example plot function plot_001a(), which used ggplot2 and platform.R to construct a simple color index plot, then save it as a vector file to be edited in the wonderful Inkscape open-source vector-graphics editing program.
+
+**001c_cs.txt:** a text-file copy of the C# unit test (NUnit) code that generated the simulation output file **001c_rawflux.txt**, which served as input to plot function plot_001c() in file **001c_plot.R**. A bit baroque I guess--makes more sense in a repeated workflow.
+
+**002a_plot.R**, **002b_plot.R**, **003_plotmags.R**, **005_plotmagsBV.R:** typical plot functions using the wonderful ggplot2 package.
+
+And I'll include the entire 010-013 set of files (see file **Experiments** for a log of these runs). It's a lot of near-repetition, but that's what this project was like. I kept all the individual runs partly for the sake of ensuring reproducibility, but mostly to ease later debugging, though so far none has been needed after the fact.
+
+If you're looking at the code, you'll see that two functions are key to many of the R code files: lm() and lmer(). Function lm() is linear regression, classical, much more capable than I've needed so far. Function lmer(), though, is the piece de resistance: mixed-model regression. Please don't ask me to explain it, rather have a look at https://en.wikipedia.org/wiki/Mixed_model . It is wonderful. It allows a dependent variable (here, Instrument Magnitude) to be described by both "fixed effects" [which are just standard predictors as in the function lm()] and "random effects" which allow for the extraction of pseudo-random *that is shared among subsets* of the data points, for example, it can extract noise shared by all photometric targets in each image, as when shutter timing is erratic.
 
 Project History *(so far)*
 ----------------------------
 
-In December 2007, the vagaries of corporate life and caused me to leave Chicago and visual observing to over-winter in beautiful but woefully cloudy Connecticut. With no sky to observe, and over numerous pots of coffee, I scoured a copy of Brian Warner's new *A Practical Guide to Lightcurve Photometry and Analysis* several times, cover to cover. However brilliantly Brian described the range of current practices, I didn't get it. I was sure there had to be a unified approach, a master model equation and ideal data set design from which one could choose a subset satisfying one's own need. I started coding. I imagined it would take a month or two.
+In December 2007, weird turns in corporate life caused me to leave Chicago to over-winter in beautiful but woefully cloudy Connecticut. With no sky to observe, I scoured a copy of Brian Warner's new *A Practical Guide to Lightcurve Photometry and Analysis* several times, cover to cover. However many pots of coffee, and however brilliantly Brian described the range of current practices, I didn't get it. I was sure there had to exist a unified approach, some master model formula and ideal data set design from which one could choose a subset sufficient to one's own need. I started exploratory coding. I imagined it would take a month or two.
 
-Almost six years later, in late 2013, I had only the barest skeleton of a unified photometric calibration approach, but I decided that I'd better start organizing to present what I had. The June 2014 presentation and this repository are the tangible fruits. The *intangible* fruits are the work yet to do--and it's a lot.
+Almost six years later, in late 2013, I had only the barest skeleton of a unified photometric calibration approach, but it was robust, linked well with R, and I decided it was time to present what I had. The June 2014 presentation and this repository are the tangible fruits. Whereas the *intangible* fruits are all the work I have yet to do on this--and it's a lot.
 
-
+At this writing--before the SAS conference and the critiquing I'm sure this work will cause--the greatest promise for continuing this work is actually in a side-effect. It proved possible to extract most of the per-image noise I had added as a "random effect" in mixed-model regression. So if there is a shutter timing problem, or more realistically if there is thin cirrus moving across the field of view over long exposures, most of this error can be removed. One can plot this "random effect" as a variable over time as a data QC check. Wow. I think that validating this with experimental photometric data is a separate project for the coming year. Call it Project Cirrus.
 
 Conclusions
 -----------

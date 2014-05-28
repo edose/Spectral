@@ -1,0 +1,366 @@
+Experiments.txt
+
+This file will include an entry for each "experiment"" (a plot or fit)
+undertaken in project Spectral. Each experiment is numbered 001, 002, ...
+and results files are as 001a_plot.png, 001a_list, etc.
+(R objects must be named as x001a_raw, x001_list because their names cannot begin with a numeral.)
+
+Plots: R saves .svg vector file, then I edit in Inkscape which saves
+as ~ 1800w X 1200h .png (PNG-24) file.
+
+PLOT EXPERIMENTS will produce (in C:\Dev\Spectral\Results\):
+  xnnna.list    a R list object ("list.nnna") of code and output summarizing the experiment
+  nnna_plot.R    the R code producing a .svg plot.
+  nnna_plot.svg & .png  summary plots
+
+FIT Experiments will produce (in C:\Dev\Spectral\Results\):
+  xnnna.list    a R list object ("list.nnna") of code and output summarizing the experiment
+  nnna_plot.R    optionally, the R code producing a .svg summary plot.
+  nnna_plot.svg & .png  optionally, summary plots.
+
+OPTIMIZE EXPERIMENTS will produce (in C:\Dev\Spectral\Results\): 
+  xnnna.list      R list object ("list.nnna") of code and output summarizing one example experiment
+  nnna_pts.txt    text table of trial points & results (e.g., std err in mag)
+  nnna_plot.R     optionally the R code producing summary plots.
+  nnna_plot.svg & .png  optionally, summary plots.
+  
+BOOTSTRAP EXPERIMENTS will produce (in C:\Dev\Spectral\Results\): 
+  xnnna.list     R list object ("list.nnna") of code and output summarizing one example experiment
+  nnna_pts.txt   text table of trial points & results (e.g., parm mean & stdev)
+  nnna_plot.R    optionally the R code producing summary plots.
+  nnna_plot.svg & .png  optionally, summary plots.
+  
+################################################################
+################################################################
+
+EXPERIMENTS:
+
+##############################################################################
+##### SERIES 001: Contrast ideal black-body with realistic PASP star colors.
+001a - PLOT (PASP color index~ star class) // done 2/5/2014.
+001b - PLOT (black-body color index ~ black-body temperature) // done 2/5/2014.
+001c - PLOT (spectra of black-body stars, overlaid) // done 2/5/2014.
+001d - PLOT (grid of spectra of selected PASP stars) // done 2/5/2014.
+>>>>> OK, imported to presentation.
+
+##############################################################################
+##### SERIES 002: Atmosphere spectra.
+002a - PLOT (spectra of atmospheres at various airmasses) // done 2/5/2014.
+002b - PLOT (same as 002a except zenith only)             // done 2/23/2014.
+>>>>> OK, imported to presentation.
+
+##############################################################################
+#################### YET TO DO, below... #####################################
+
+##############################################################################
+##### SERIES 003: Ideal black-body stars, NO atmosphere, perfect optics and detector.
+003a - FIT (InstMag ~ CI), black-body stars, filter=[none], Zenith
+003b - FIT (InstMag ~ CI), black-body stars, filter=V Johnson (530 nm), Zenith
+003c - FIT (InstMag ~ CI), black-body stars, filter=Baader Green (567 nm), Zenith
+003d - FIT (InstMag ~ CI), black-body stars, filter=Sloan G (517 nm), Zenith
+003e - FIT (InstMag ~ CI), black-body stars, filter=Asahi 540 100, Zenith
+003f - FIT (InstMag ~ CI), black-body stars, filter=Asahi 540 60, Zenith
+>>>>> OK 2/9/2014: PLOT done & imported to presentation. Fits not actually used.
+
+##############################################################################
+##### SERIES 004: Realistic PASP stars, real atmosphere, perfect optics and detector.
+004a - FIT (InstMag ~ CI), PASP stars, filter=[none], Zenith
+004b - FIT (InstMag ~ CI), PASP stars, filter=V Johnson (530 nm), Zenith
+004c - FIT (InstMag ~ CI), PASP stars, filter=Baader Green (567 nm), Zenith
+004d - FIT (InstMag ~ CI), PASP stars, filter=Sloan G (517 nm), Zenith
+004e - FIT (InstMag ~ CI), PASP stars, filter=Asahi 540 100, Zenith
+004f - FIT (InstMag ~ CI), PASP stars, filter=Asahi 540 60, Zenith
+>>>>> 2/9/2014: Fits done, no plots. M-class stars do not behave at all.
+
+##############################################################################
+##### SERIES 005: Realistic PASP stars, NO atmosphere, perfect optics and detector.
+#####    we're backing up here to test stars-only effect, without atmosphere.
+005a - FIT (InstMag ~ CI), PASP stars, filter=[none], Zenith
+005b - FIT (InstMag ~ CI), PASP stars, filter=V Johnson (530 nm), Zenith
+005c - FIT (InstMag ~ CI), PASP stars, filter=Baader Green (567 nm), Zenith
+005d - FIT (InstMag ~ CI), PASP stars, filter=Sloan G (517 nm), Zenith
+005e - FIT (InstMag ~ CI), PASP stars, filter=Asahi 540 100, Zenith
+005f - FIT (InstMag ~ CI), PASP stars, filter=Asahi 540 60, Zenith
+>>>>> 2/9/2014: Fits & plots done: Need to use V-I color index, and
+      need to eliminate very red stars (those with V-I >= 1.6, for example).
+
+##############################################################################
+##### SERIES 006: Realistic PASP stars, NO atmosphere, perfect optics and detector.
+#####    based on color index V-I, eliminating very red stars.
+006a - FIT (InstMag ~ CI), PASP stars, filter=[none], Zenith
+006b - FIT (InstMag ~ CI), PASP stars, filter=V Johnson (530 nm), Zenith
+006c - FIT (InstMag ~ CI), PASP stars, filter=Baader Green (567 nm), Zenith
+006d - FIT (InstMag ~ CI), PASP stars, filter=Sloan G (517 nm), Zenith
+006e - FIT (InstMag ~ CI), PASP stars, filter=Asahi 540 100, Zenith
+006f - FIT (InstMag ~ CI), PASP stars, filter=Asahi 540 60, Zenith
+>>>>> Done 2/16/2014. Results:
+filter     X006 run  mmag resid sterr   Transform=slope (stderr)
+none          a            141.7             -0.410 (0.027)
+V Bessel      b              2.1             -0.022 (0.0004) excellent, #1
+Green Baader  c              5.6              0.071 (0.001)  
+Sloan G       d             40.3              0.601 (0.008)
+Asahi 540 100 e             22.2             -0.037 (0.004)  #2 (!)
+Asahi 540 60  f             32.2             -0.082 (0.006)
+--> V Bessel rules in this ideal case: slow mmag error & transform size.
+    Sloan G surprisingly bad.
+
+##############################################################################
+##### SERIES 007: Add atmosphere & realistic optics and detector.
+#####    Realistic PASP stars, real atmosphere at zenith.
+#####    Based on color index V-I, eliminating very red stars.
+007a - FIT (InstMag ~ CI), PASP stars, filter=[none], Zenith
+007b - FIT (InstMag ~ CI), PASP stars, filter=V Bessell (530 nm), Zenith
+007c - FIT (InstMag ~ CI), PASP stars, filter=Baader Green (567 nm), Zenith
+007d - FIT (InstMag ~ CI), PASP stars, filter=Sloan G (517 nm), Zenith
+007e - FIT (InstMag ~ CI), PASP stars, filter=Asahi 540 100, Zenith
+007f - FIT (InstMag ~ CI), PASP stars, filter=Asahi 540 60, Zenith
+>>>>> Done 2/16/2014. Results:
+filter     X007 run  mmag resid sterr   Transform=slope (stderr)
+none          a             54.0             -0.270 (0.010)  better
+V Bessell     b              3.6             -0.046 (0.0007) not as good; #2 (!)
+Green Baader  c              4.5              0.057 (0.001)  better
+Sloan G       d             32.9              0.506 (0.006)
+Asahi 540 100 e              2.6             +0.031 (0.0005) much better; #1 (!)
+Asahi 540 60  f              5.2             +0.040 (0.001)  much better
+--> V Bessel outperformed; sky and rig acting as filters, 
+    doing part of filters' job (?).
+
+##############################################################################
+##### BLOCK SERIES: Find "best" V-filter thickness for given rig, PASP, zenith.
+#####    Adjust filter thickness in C#, fit in R, seek minimum err & transform slope.
+008a - OPTIMIZE (std err mag ~V Bessell thickness), PASP stars, filter=V, at Zenith
+rel.thickness  mmag resid sterr   Transform=slope (stderr)  zero-point mag (V)
+     0.8             4.10             -0.0532 (0.0008)          -21.62 best
+     1.0             2.89             -0.0363 (0.0005)          -21.51
+     1.2             2.01             -0.0231 (0.0004)          -21.42
+     1.6             1.24 best        -0.0037 (0.0002)          -21.26
+     2.0             1.67             +0.0102 (0.0003) best     -21.12
+--> tradeoff between high flux and low transform.
+
+008b - OPTIMIZE (as 008a except ST-8 detector, not 1001E)
+rel.thickness  mmag resid sterr   Transform=slope (stderr)  zero-point mag (V)
+     0.8             5.16             -0.0722 (0.0010)          -21.42
+     1.0             4.03             -0.0551 (0.0008)          -21.31
+     1.2             3.16             -0.0415 (0.0006)          -21.21
+     1.6             2.04             -0.0208 (0.0004)          -21.05
+     2.0             1.67 best        -0.0057 (0.0003) best     -20.90 best
+--> very same as 008a except lower flux & higher transform (nb: cheaper detector)
+
+008c - OPTIMIZE (as 008a except Green Baader filter, 1001E detector)
+rel.thickness  mmag resid sterr   Transform=slope (stderr)  zero-point mag (V)
+     0.5            8.48              -0.0496 (0.0016)          -21.58
+     0.6            5.22              -0.0065 (0.0010)          -21.49
+     0.7            3.63              +0.0238 (0.0007)          -21.42
+     0.8            3.71              +0.0444 (0.0007)          -21.37
+--> if at 0.6 of standard thickness, would be almost as good as V Bessell filter.
+
+008d - OPTIMIZE (as 008a except Asahi 540 100 filter, 1001E detector)
+rel.thickness  mmag resid sterr   Transform=slope (stderr)  zero-point mag (V)
+     0.5            2.25              +0.0367 (0.0004)          -21.44
+     0.8            2.82              +0.0401 (0.0005)          -21.32
+     1.0            2.94              +0.0404 (0.0006)          -21.24
+     2.0            3.17              +0.0403 (0.0006)          -20.90
+--> could use thinner one in a pinch, but how does it perform at higher airmasses?
+
+--> overall 008: off-the-shelf filter thicknesses may not be ideal for a given rig, but OK.
+>>>>> DONE 2/23/2014.
+
+
+##############################################################################
+##### BLOCK 009: adds airmass effect for search for full model form (no noise).
+009a - PLOT (mag ~ airmass), massive plot of 107 star curves, PASP stars, filter=V
+009b - PLOT (as 009a, except all curves y-shifted to be equal at left end)
+>>>>> DONE 2/23/2014.
+
+>>>>> NB: from here, xnnnx_list objects have 6 (not 5) elements; henceforth the
+>>>>>     5th (summary of model) element is named 'summary' (not 'model'), and
+>>>>>     a new 6th element (the model ready for anova etc) is named 'model'
+
+##############################################################################
+##### BLOCK 010: first fits of both transform & extinction.
+#####            Ideal optics: V Bessell filter, ST-1001E detector.
+#####            No added noise.
+#####            Data = x010a_raw for ALL 010 runs.
+010a - FIT (mag ~ airmass + CI), 107 PASP stars, airmasses 1-3.
+010b - FIT (mag ~ airmass + CI + airmass:CI), same stars, airmasses 1-3.
+010c - FIT as 010a except airmass 1-2 (not 1-3)
+010d - FIT as 010b except airmass 1-2 (not 1-3)
+a: stderr=3.79 mmag; tr=-0.042(0), ext=0.169(0).
+b: stderr=3.28 mmag; tr=-0.042(0), ext=0.169(0), 2nd-order=-0.0061(0.0002).
+ANOVA(a,b) -> F=747; new "2nd-order" term highly significant (X=1-3).
+c: stderr=3.21 mmag; tr=-0.039(0), ext=0.170(0).
+d: stderr=3.06 mmag; tr=-0.042(0), ext=0.170(0), 2nd-order=-0.0061(0.0005).
+ANOVA(c,d) -> F=124; new "2nd-order" term rather significant (X=1-2).
+##### Now try a very full model (could trim terms from here).
+010e - FIT (mag ~ airmass + airmass^2 + CI + CI^2 + airmass:CI), airmass 1-3.
+010f - FIT as 010e except airmass 1-2 (not 1-3)
+e: stderr = 2.75 mmag; tr=-0.043(0), tr.2=-0.007(0), ext=0.169(0), ext.2=-0.006(0),
+            2nd-order=-0.0061(0.0002).
+f: stderr = 2.58 mmag; tr=-0.043(0), tr.2=-0.007(0), ext=0.169(1), ext.2=-0.001(1),
+            2nd-order=0.006(0).
+ANOVA(a,e) -> F=678; new terms (all together) highly significant (X=1-3).
+ANOVA(c,f) -> F=217; new terms (all together) rather significant (X=1-2).
+ANOVA(b,e) -> F=483; square terms highly significant (X=1-3).
+ANOVA(d,f) -> F=238; square terms rather significant (X=1-2).
+--> For ~ ideal case, square+2nd-order terms help little for X=1-3, v litte for 1-2.
+>>>>> Done 3/2/2014.
+
+##############################################################################
+##### BLOCK 011: first fits of both transform & extinction.
+#####            Optics: V Bessell filter, ST-8XE detector.
+#####            No added noise.
+#####            Data = x011a_raw for ALL 011 runs.
+011a - FIT (mag ~ airmass + CI), 107 PASP stars, airmasses 1-3.
+011b - FIT (mag ~ airmass + CI + airmass:CI), same stars, airmasses 1-3.
+011c - FIT as 011a except airmass 1-2 (not 1-3)
+011d - FIT as 011b except airmass 1-2 (not 1-3)
+a: stderr=4.75 mmag, transform=-0.061(0), extinction=0.167(0).
+b: stderr=4.38 mmag, tr=-0.061(0), ext=0.167(0), 2nd-order=-0.0059(0.0003).
+ANOVA(a,b) -> F=390; new "2nd-order" term highly significant (X=1-3).
+c: stderr=4.28 mmag, tr=-0.058(0), ext=0.169(0).
+d: stderr=4.18 mmag; tr=-0.058(0), ext=0.169(0), 2nd-order=-0.0059(0.0008).
+ANOVA(c,d) -> F=61; new "2nd-order" term not very significant (X=1-2).
+##### Now try a very full model (could trim terms from here).
+011e - FIT (mag ~ airmass + airmass^2 + CI + CI^2 + airmass:CI), airmass 1-3.
+011f - FIT as 011e except airmass 1-2 (not 1-3)
+e: stderr =  3.80 mmag; tr=0.062(0), tr.2=-0.009(0), ext=0.167(0), ext.2=-0.002(0),
+             2nd-order=-0.006(0).
+f: stderr =  3.64 mmag; tr=0.059(0), tr.2=-0.008(0), ext=0.169(0), ext.2=-0.001(1),
+             2nd-order=-0.006(1).
+ANOVA(a,e) -> F=422; new terms (all together) rather significant (X=1-3).
+ANOVA(c,f) -> F=152; new terms (all together) somewhat significant (X=1-2).
+ANOVA(b,e) -> F=374; square terms rather significant (X=1-3).
+ANOVA(d,f) -> F=188; square terms somewhat significant (X=1-2).
+--> For narrower-band detector, errors ~ higher, but 
+       square+2nd-order terms help even less.
+
+##############################################################################
+##### BLOCK 012: fits of both transform & extinction; same as 010 except filter.
+#####            Optics: Green Baader filter, ST-1001E detector.
+#####            No added noise.
+#####            Data = x012a_raw for ALL 012 runs.
+012a - FIT (mag ~ airmass + CI), 107 PASP stars, airmasses 1-3.
+012b - FIT (mag ~ airmass + CI + airmass:CI), same stars, airmasses 1-3.
+012c - FIT as 012a except airmass 1-2 (not 1-3)
+012d - FIT as 012b except airmass 1-2 (not 1-3)
+a: stderr=4.95 mmag; transform=0.063(0), extinction=+0.178(0).
+b: stderr=4.78 mmag, tr=0.063(0), ext=+0.178(0), 2nd-order=-0.0042(0.0004).
+ANOVA(a,b) -> F=167; new "2nd-order" term somewhat significant (X=1-3).
+c: stderr= 4.94 mmag; tr=0.065(0), ext=+0.180(0).
+d: stderr= 4.90 mmag; tr=0.065(0), ext=+0.180(0), 2nd-order=-0.0042(0.0009).
+ANOVA(c,d) -> F=22; new "2nd-order" term not significant (X=1-2).
+##### Now try a very full model (could trim terms from here).
+012e - FIT (mag ~ airmass + airmass^2 + CI + CI^2 + airmass:CI), airmass 1-3.
+012f - FIT as 012e except airmass 1-2 (not 1-3)
+e: stderr = 3.99 mmag, tr=0.064(0), tr.2=0.01(0), ext=0.178(0), ext.2=-0.001(0).
+f: stderr = 4.09 mmag, tr=0.066(0), tr.2=0.01(0), ext=0.180(0), ext.2=-0.001(1),
+   2nd-order=-0.004(1).
+ANOVA(a,e) -> F=405; new terms (all together) rather significant (X=1-3).
+ANOVA(c,f) -> F=179; new terms (all together) somewhat significant (X=1-2).
+ANOVA(b,e) -> F=488; square terms rather significant (X=1-3).
+ANOVA(d,f) -> F=253; square terms somewhat significant (X=1-2).
+--> For off-filter, in this case at least, detector seems to make more
+    difference than filter in transform (1), filter seems to make more
+    difference in extinction.
+
+##############################################################################
+##### BLOCK 013: First simulations of realistic transform determination.
+#####            Optics: V Bessell filter, ST-1001E detector.
+#####            Use master table x013a_raw of potential image signals, for all
+#####               107 stars (over color index range) & over airmass range.
+#####            Data x013a_raw = 81 airmasses x 131 stars, for bootstraps.
+[runs named as x013a_sim]
+013a - SIM 1000 trials, 7 stars (3 blue, 1 mid, 3 red), 5 airmasses 1.3-2 (2 low, 1 mid, 2 high), 
+       no noise. Output saved as file/list x013a_list.
+                   s      s.image       s.star     intercept        tform      extinct            ZP
+Min.    0.0005209176 0.000000e+00 0.0006694075 -11.385820000 -0.055877860 0.1979688000 -11.665930000
+1st Qu. 0.0007852336 0.000000e+00 0.0024380690 -11.382880000 -0.048550350 0.1986320000 -11.662820000
+Median  0.0008543178 0.000000e+00 0.0030517220 -11.382050000 -0.046830270 0.1988255000 -11.661520000
+Mean    0.0008554960 4.055057e-18 0.0031778650 -11.382050000 -0.047013530 0.1988167000 -11.661470000
+3rd Qu. 0.0009236936 0.000000e+00 0.0037533190 -11.381130000 -0.045319220 0.1990090000 -11.660250000
+Max.    0.0011551180 1.982944e-16 0.0065493940 -11.378620000 -0.040573550 0.1996093000 -11.655010000
+St.Dev  0.0001003358 1.425407e-17 0.0010253581   0.001229377  0.002382543 0.0002678658   0.001859727
+  Millimagnitude calibration achieved (s < 1 mmag); per-image noise near 0 (as none added);
+  per-star noise dominates (as system response not exactly equal to passband); intercept and ZP
+  well determined (s~1 mmag); transform well determined; extinction v well determined.
+
+013b - As 013a except add 3 mmag random noise.
+                   s      s.image      s.star    intercept        tform     extinct            ZP
+Min.    0.0019828430 0.000000e+00 0.000000000 -11.38588000 -0.054928870 0.194176100 -11.670910000
+1st Qu. 0.0027365680 0.000000e+00 0.001934585 -11.38293000 -0.048515510 0.197740800 -11.663770000
+Median  0.0030429830 1.500938e-16 0.002741968 -11.38201000 -0.046796430 0.198844900 -11.661480000
+Mean    0.0030516660 1.897221e-04 0.002792078 -11.38200000 -0.046904700 0.198828300 -11.661480000
+3rd Qu. 0.0033368800 2.769692e-04 0.003616068 -11.38108000 -0.045138090 0.199963100 -11.659400000
+Max.    0.0046184640 1.787797e-03 0.007213330 -11.37782000 -0.040579310 0.203911000 -11.650150000
+St.Dev  0.0004275073 3.335661e-04 0.001272364   0.00138229  0.002466084 0.001659105   0.003315666
+  Error dominated by added noise (good). Per-image noise still near 0 (good, none added);
+  per-star noise ~ unchanged; intercept and ZP still very well determined and both very close 
+  to no-noise case (an excellent result).
+      
+013c - As 013a except add 3 mmag per-image noise (no random noise).
+                   s     s.image       s.star     intercept        tform     extinct            ZP
+Min.    0.0005446573 0.000000000 0.0007053355 -11.387570000 -0.054272080 0.186733900 -11.687210000
+1st Qu. 0.0008225925 0.001574520 0.0023583320 -11.383370000 -0.048445410 0.195874700 -11.666230000
+Median  0.0008952306 0.002247467 0.0030293490 -11.382130000 -0.046786630 0.198785100 -11.661670000
+Mean    0.0008929539 0.002354181 0.0031244790 -11.382130000 -0.046930480 0.198834500 -11.661610000
+3rd Qu. 0.0009635090 0.003027173 0.0037818810 -11.380900000 -0.045253620 0.201755200 -11.656830000
+Max.    0.0012658170 0.005815362 0.0065804940 -11.376870000 -0.040951110 0.216752300 -11.639900000
+St.Dev  0.0001065986 0.001056608 0.0010627161   0.001815403  0.002343813 0.004313983   0.007218447
+  Per-image noise accounted for (suppressed by) ~ 80%; random noise very low; 
+  per-star noise ~ unchanged (good). Almost no change in intercept, ZP, transform, or extinction. 
+  An excellent result.
+
+013d - As 013a except 3 mmag per-star noise added (catalog noise or rounding to 0.01 mag); 
+       no other noise added.
+                   s      s.image      s.star     intercept        tform      extinct           ZP
+Min.    4.923808e-04 0.000000e+00 0.000704912 -11.386600000 -0.059758690 0.1981021000 -11.66849000
+1st Qu. 7.775107e-04 0.000000e+00 0.003099802 -11.383140000 -0.049056260 0.1986488000 -11.66325000
+Median  8.503497e-04 0.000000e+00 0.004010518 -11.382010000 -0.046758350 0.1988368000 -11.66156000
+Mean    8.457929e-04 4.247983e-18 0.004057775 -11.381980000 -0.046948590 0.1988337000 -11.66145000
+3rd Qu. 9.143483e-04 0.000000e+00 0.004956474 -11.380900000 -0.044741280 0.1990198000 -11.65986000
+Max.    1.112982e-03 3.017635e-16 0.008735800 -11.376060000 -0.037700970 0.1996110000 -11.65163000
+St.Dev  9.584606e-05 1.828289e-17 0.001351441   0.001736939  0.003189894 0.0002680828   0.00259049
+  Per-star noise accounted for (suppressed) almost entirely. Intercept, ZP, and transform get noisier, 
+  but no bias, and all other measures very similar to no-noise case. Nice result.
+
+013e - As 013a except all 3 noise types (random, per-image, per-star) added at 3 mmag.
+                   s     s.image      s.star     intercept        tform     extinct            ZP
+Min.    0.0016363320 0.000000000 0.000000000 -11.388500000 -0.058505150 0.185754900 -11.687500000
+1st Qu. 0.0027931220 0.001201755 0.002685604 -11.383590000 -0.049027420 0.195712900 -11.666730000
+Median  0.0030961280 0.001993776 0.003726684 -11.382030000 -0.046683900 0.198724000 -11.661560000
+Mean    0.0031082860 0.002069900 0.003796851 -11.382050000 -0.046905610 0.198935300 -11.661690000
+3rd Qu. 0.0034107380 0.002910948 0.004848050 -11.380560000 -0.044607340 0.201909500 -11.656230000
+Max.    0.0045710970 0.007111323 0.008889482 -11.375170000 -0.038016390 0.214104600 -11.639430000
+St.Dev  0.0004629569 0.001263393 0.001560303   0.002297687  0.003186774 0.004511081   0.007690091
+  Very stable! Most image and some star noise removed. Transform and Extinction values very stable.
+  Surprisingly good result. Used in SAS paper.
+
+013f - As 013e except each noise added at 10 mmag.
+                  s     s.image      s.star     intercept        tform    extinct           ZP
+Min.    0.005599348 0.000000000 0.000000000 -11.401610000 -0.073411850 0.15472350 -11.74031000
+1st Qu. 0.008946097 0.004162786 0.005043915 -11.386450000 -0.051551520 0.18836230 -11.67826000
+Median  0.009950810 0.006793951 0.008015241 -11.382120000 -0.046562250 0.19854750 -11.66157000
+Mean    0.009963688 0.007002199 0.008079718 -11.382090000 -0.046852210 0.19918040 -11.66212000
+3rd Qu. 0.010925440 0.009831993 0.010886110 -11.377490000 -0.041822870 0.20897170 -11.64399000
+Max.    0.014823780 0.023876350 0.022681070 -11.363490000 -0.017890860 0.24932700 -11.58315000
+St.Dev  0.001495228 0.004179475 0.004058677   0.006649717  0.007580627 0.01502222   0.02507448
+  A pretty typical amateur case. About 70% of per-image and ~80% of per-star random error 
+  accounted for/suppressed. Transform is small but even so is determined to about 15% rsd, 
+  which is sub-mmag error for a color index uncertainty of 0.1 mag. Extinction is determined
+  to 15 mmag/airmass, quite good. Zero-point is not nearly as well determined as intercept,
+  which speaks to advantage of data centering in assessing errors. Used in SAS paper.
+
+
+013g - As 013e except random noise at 3 mmag, per-star noise added at 10 mmag (cirrus test).
+                   s     s.image      s.star     intercept        tform    extinct           ZP
+Min.    0.0017051990 0.000000000 0.000000000 -11.395870000 -0.056722120 0.14824350 -11.74264000
+1st Qu. 0.0027869920 0.005376609 0.001967518 -11.385340000 -0.048401840 0.18852670 -11.67740000
+Median  0.0030905070 0.007688214 0.002757397 -11.381840000 -0.046572220 0.19834220 -11.66081000
+Mean    0.0031035560 0.007910582 0.002804406 -11.381930000 -0.046735520 0.19848450 -11.66096000
+3rd Qu. 0.0033952090 0.010079730 0.003631382 -11.378490000 -0.044923740 0.20863550 -11.64547000
+Max.    0.0046325560 0.022286250 0.006967708 -11.366260000 -0.041124040 0.25017550 -11.58517000
+St.Dev  0.0004577846 0.003456999 0.001273535   0.004910074  0.002514236 0.01420187   0.02307627
+  Good - transform and extinction very well determined, 3 mmag residual, 80% of per-star noise
+  apparently extracted. Used in SAS paper.
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
