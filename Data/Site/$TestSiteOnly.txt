@@ -1,0 +1,8 @@
+$TestSiteOnly
+39.0 0.400 0.001      // latitude/deg+-; elevation/km; height/km
+1                     // pollutionModelCode
+'S&F_RURAL'           // aerosolModelCode
+5.0, 60.0 WINTER 12   // airtemp/degC; relHum/%; seasonCode; meanDailyTemp/C
+3.0                   // precip water vapor above site/cm
+0.3341                // ozone abund sea level / atm*cm
+101                   // visibility/km

@@ -35,9 +35,9 @@ There's no main C# program to run--I ran everything through NUnit. However, as a
 
 Have a look at the R code. If a function call isn't obvious, check its online documentation. With that, most programmers will figure out my R code in about 2 minutes.
 
-By the way, all the software needed for this project was free: Visual Studio for C#, NUnit for unit testing, Notepad++ for text management, the R framework, RStudio as R control panel, ggplot2 for R graphics, all R statistics packages, GitHub for this repository, even web site rst.ninjs.org to construct the reStructuredText documentation file you're reading now. I didn't pay for software until I wrote the final paper and made the final presentation.
+By the way, all the software needed for this project was free: Visual Studio for C#, NUnit for unit testing, Notepad++ for text management, the R framework, RStudio as R control panel, all R statistics packages, ggplot2 for R graphics and Inkscape for vector graphics post-processing, SourceTree for git repository management, GitHub web site for this repository, and even web site rst.ninjs.org to construct the reStructuredText documentation file you're reading now. I didn't pay for software until I wrote the final paper and made the final presentation.
 
-*Note: I do not plan to refine or extend this code anytime soon. You are welcome to use the code in any manner consistent with the license (file "LICENSE" of this repository) which basically says Be Fair.*
+*Note: I do not plan to refine or extend this code anytime soon. You are welcome to use the code in any manner consistent with the license (file **LICENSE** of this repository) which basically says Be Fair.*
 
 1. Optical stack simulation:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -62,7 +62,7 @@ With C#'s being a true object-oriented, strongly encapsulated language, it is sa
 
 Notes:
 
-- **star** is a stellar light source, which is represented as photon flux at wavelengths from 300 nm to 1300 nm [an object of C# class PFluxPer Area].
+- **star** is a stellar light source, which is represented as photon flux at wavelengths from 300 nm to 1300 nm [an object of C# class PFluxPerArea].
 - **reflector** is used when the observed light source is a reflector of stellar light, for example, an asteroid. A reflector has its own reflectance spectrum, operationally identical to a filter [object of class Filter].
 - **airPaths** is a previously computed vector of atmospheric transmission spectra at user-specified airmasses. Computation of the atmospheric transmission spectra is performed by SMARTS2 software, which is invoked by the C# code in 3_Atmosphere.cs. This atmospheric simulation was by far the most difficult part of the optical stack simulation to get right, even with the SMARTS2 software, and it takes > 95% of the simulation computing time [array of objects of class AirPath, which are produced by a factory method of class Atmosphere].
 - **filterAtScopeFront** simulates covering the front of the scope with a filter material. I've never used this, rather nullified its presence by simply using an object with transmission=1 at all wavelengths [object of class Filter].
@@ -78,7 +78,9 @@ After the optical stack simulation, the passband simulation is easy: multiply th
 3. Statistics:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-All statistical code is in the R language. I almost always ran code as a function call from RStudio's Console window, the code itself showing in the window immediately above that. That's it. 
+All statistical code is in the R language. I almost always ran code as a function call from RStudio's Console window, the code itself showing in the window immediately above that. That's it.
+
+(By the way, C, Java, and python folks, here's an R quirks: within R variable names like s.image, the period has no significance, it's only another character like underscore.)
 
 Some of the files:
 
@@ -96,6 +98,10 @@ And I'll include the entire 010-013 set of files (see file **Experiments** for a
 
 If you're looking at the code, you'll see that two functions are key to many of the R code files: lm() and lmer(). Function lm() is linear regression, classical, much more capable than I've needed so far. Function lmer(), though, is the piece de resistance: mixed-model regression. Please don't ask me to explain it, rather have a look at https://en.wikipedia.org/wiki/Mixed_model . It is wonderful. It allows a dependent variable (here, Instrument Magnitude) to be described by both "fixed effects" [which are just standard predictors as in the function lm()] and "random effects" which allow for the extraction of pseudo-random *that is shared among subsets* of the data points, for example, it can extract noise shared by all photometric targets in each image, as when shutter timing is erratic.
 
+4. Data:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+In the *Data* directory are example files used as input to the simulations. I've left out certain filters to avoid possible copyright issues; others I've left in as "fair use", and I very much doubt the vendors will complain about my including their data with their company name as part of the file names.
+
 Project History *(so far)*
 ----------------------------
 
@@ -108,7 +114,7 @@ At this writing--before the SAS conference and the critiquing I'm sure this work
 Conclusions
 -----------
 
-[Conclusions from the SAS paper go here.]
+Have a look at the last slides in the presentation PDF. No point in duplicating them here.
 
 Side-trip: Coding Language
 -----------------------------
@@ -121,8 +127,18 @@ C# beautifully satisfies the scientific community's most common need for objects
 
 R is underused in the scientific world. The statisticians and social scientists have all the fun (and that's probably the first time *that* sentence has ever been written).
 
-
 2014-2015 Plans at Bois d'Arc Observatory
 ------------------------------------------
 
-[extension to experimental data; Project Cirrus/mixed-model regression]
+My, there are dozens of things to do, but I'll mention here only the ones likely to actually get done.
+
+- Gotta get some experimental data. I have a soon-to-be-automated 11" SCT which is more than large enough for this work, and the first thing is to track Landolt stars across the sky, and down below 30 degrees altitude. It's the only way to test the better regression
+
+- Experimental data to support some of the conclusions and suggestions at the end of the paper and presentation.
+
+- Project Cirrus: get experimental data to test the per-image noise model. My previous simulations suggest that one can extract per-image data down to millimagnitude levels. I doubt the per-noise model will show up on very clear nights, but it shouldn't be hard to test it as well on nights with thin cirrus passing. And here's a cheat--I have dark skies at Bois d'Arc, but Topeka's light dome is just bright enough on the horizon to light up cirrus slightly. If the per-image noise that shows up in mixed-model regression as a random effect correlates with cirrus as measured by image background brightness on long exposures, that pretty solidly supports the case.
+
+----
+
+*[end]*
+

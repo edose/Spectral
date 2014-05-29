@@ -1,0 +1,8 @@
+Perfect 14
+0.3556 35.0 
+// perfectly transparent scope of size Meade 14.
+300 1
+400 1
+800 1
+1200 1
+1300 1
