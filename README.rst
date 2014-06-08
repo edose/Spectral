@@ -2,7 +2,7 @@ Spectral
 ===============================
 *Eric Dose :: Bois d'Arc Observatory, Kansas  ::  June 2014*
 
-This repository supports my June 14, 2014 presentation *Toward Millimagnitude Photometric Calibration* before the SAS (Society for Astronomical Science) 2014 conference in Ontario, California, USA.
+This repository supports my June 13, 2014 presentation *Toward Millimagnitude Photometric Calibration* before the SAS (Society for Astronomical Science) 2014 conference in Ontario, California, USA.
 
 Contents
 --------------------
